@@ -20,8 +20,15 @@ class MyDelegate(btle.DefaultDelegate):
         btle.DefaultDelegate.__init__(self)
 
     def handleNotification(self, cHandle, data):
-        print("A notification was received: {}".format(data))
-
+        for val in struct.iter_unpack('<h', data):
+            if val[0] < 0:
+                sys.stdout.write('\t{}'.format(val[0]))
+            else:
+                sys.stdout.write('\t {}'.format(val[0]))
+        sys.stdout.write('\n')
+        sys.stdout.flush()
+        # print(''.join([' %02x' % b for b in data]))
+        # print("A notification was received: {}".format(data))
 
 def pairWand():
     print("Looking for a magic wand...")
