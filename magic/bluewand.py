@@ -7,6 +7,7 @@
 
 from bluepy import btle
 from time import sleep
+import struct
 import sys
 
 LED_CHAR_W = '0x001e'
